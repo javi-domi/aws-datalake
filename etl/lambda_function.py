@@ -8,11 +8,11 @@ def handler(event, context):
     client = boto3.client('emr', region_name='us-east-2')
 
     cluster_id = client.run_job_flow(
-        Name='EMR-Ney-IGTI-delta',
+        Name='EMR-EDC',
         ServiceRole='EMR_DefaultRole',
         JobFlowRole='EMR_EC2_DefaultRole',
         VisibleToAllUsers=True,
-        LogUri='s3://datalake-edc/emr-logs',
+        LogUri='s3://datalake-edc-bt/emr-logs',
         ReleaseLabel='emr-6.3.0',
         Instances={
                     'InstanceGroups': [
@@ -31,10 +31,10 @@ def handler(event, context):
                             'InstanceCount': 1,
                         }
                     ],
-            'Ec2KeyName': 'ney-igti-teste',
+            'Ec2KeyName': 'jav-emr-keys',
             'KeepJobFlowAliveWhenNoSteps': True,
             'TerminationProtected': False,
-            'Ec2SubnetId': 'subnet-1df20360'
+            'Ec2SubnetId': 'subnet-0f2b8f1bf1f8cc8af'
         },
 
         Applications=[
@@ -89,12 +89,9 @@ def handler(event, context):
                     'HadoopJarStep': {
                         'Jar': 'command-runner.jar',
                         'Args': ['spark-submit',
-                                 '--packages', 'io.delta:delta-core_2.12:1.0.0',
-                                 '--conf', 'spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension',
-                                 '--conf', 'spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog',
                                  '--master', 'yarn',
                                  '--deploy-mode', 'cluster',
-                                 's3://datalake-edc/emr-code/pyspark/spark_job.py'
+                                 's3://datalake-edc-tf/emr-code/pyspark/spark_job.py'
                                  ]
                     }
         }],
