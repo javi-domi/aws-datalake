@@ -5,6 +5,7 @@ This is a project to create a datalake on AWS using the following technologies:
 - AWS Athena
 - AWS S3
 - AWS EMR
+- AWS Lambda
 - Terraform
 - Python
 - Apache Spark
