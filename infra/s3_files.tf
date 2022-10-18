@@ -1,7 +1,7 @@
-resource "aws_s3_bucket_object" "job_spark" {
+resource "aws_s3_bucket_object" "spark_job" {
   bucket = aws_s3_bucket.datalake.id
-  key    = "emr-code/pyspark/job_spark.py"
+  key    = "emr-code/pyspark/spark_job.py"
   acl    = "private"
-  source = "../job_spark.py"
-  etag   = filemd5("../job_spark.py")
+  source = "../spark_job.py"
+  etag   = filemd5("../spark_job.py")
 }
