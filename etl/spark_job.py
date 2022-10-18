@@ -12,7 +12,7 @@ rais = (
     .option("inferSchema", True)
     .option("header", True)
     .option("delimiter", ";")
-    .load('s3://datalake-edc/raw-data/rais')
+    .load('s3://datalake-edc-bt/raw-data/rais')
 )
 
 # rais_modified = (
@@ -89,5 +89,5 @@ rais = (
     .write
     .mode("overwrite")
     .format("parquet")
-    .save("s3://datalake-edc/staging-zone/rais")
+    .save("s3://datalake-edc-bt/staging-zone/rais")
 )
