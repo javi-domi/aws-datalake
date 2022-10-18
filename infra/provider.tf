@@ -4,8 +4,8 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "terraform-state-edc"
-    key    = "state/edc/mod1/terraform.tfstate"
+    bucket = "terraform-state-edc-btc"
+    key    = "state/terraform.tfstate"
     region = "us-east-1"
   }
 }
